@@ -42,6 +42,8 @@ export default defineComponent({
 
       if (this.chatHidden) {
         this.chatSource = "";
+      } else {
+        this.chatSource = `https://www.twitch.tv/embed/${this.channel}/chat?parent=${parent}&darkpopout`;
       }
     },
     handleSubmit() {
