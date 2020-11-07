@@ -1,0 +1,45 @@
+
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  height: 50px;
+  background-color: #18181b;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+
+  form {
+    height: 100%;
+  }
+
+  input {
+    min-width: 250px;
+    padding: 0.5rem;
+    height: 100%;
+    color: #fff;
+    border: none;
+    background-color: transparent;
+    outline: none;
+
+    &:focus {
+      border-color: rgba(255,255,255,0.2);
+    }
+  }
+
+  button {
+    padding: 0.5rem;
+    color: #fff;
+    border: 1px solid tomato;
+    border-radius: 4px;
+    background-color: tomato;
+    cursor: pointer;
+    outline: none;
+
+    &.clear {
+      color: tomato;
+      border-color: transparent;
+      background-color: transparent;
+    }
+  }
+}

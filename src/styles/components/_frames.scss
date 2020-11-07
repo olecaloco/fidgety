@@ -1,0 +1,30 @@
+.player-wrap {
+  display: flex;
+  height: calc(100% - 50px);
+
+  iframe {
+    height: 100%;
+
+    &:first-child,
+    &:last-child {
+      background: #18181b;
+    }
+
+    &:first-child {
+      flex: 1 1 0%;
+    }
+
+    &:last-child {
+      width: 340px;
+      border-left: 1px solid rgba(255,255,255,0.2);
+    }
+
+    &.hidden {
+      display: none;
+    }
+  }
+}
+
+#chat.hidden {
+  display: none;
+}
