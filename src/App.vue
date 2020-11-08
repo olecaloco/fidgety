@@ -2,6 +2,7 @@
   <main class="app">
     <Navbar
       :channel="channel"
+      :chatHidden="chatHidden"
       @update:channel="channel = $event"
       @toggle-chat="toggleChat"
       @handle-submit="handleSubmit"
@@ -43,7 +44,8 @@ export default defineComponent({
       if (this.chatHidden) {
         this.chatSource = "";
       } else {
-        this.chatSource = `https://www.twitch.tv/embed/${this.channel}/chat?parent=${parent}&darkpopout`;
+        if (this.channel)
+          this.chatSource = `https://www.twitch.tv/embed/${this.channel}/chat?parent=${parent}&darkpopout`;
       }
     },
     handleSubmit() {

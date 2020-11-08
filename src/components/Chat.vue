@@ -1,15 +1,15 @@
 <template>
-  <iframe :class="{hidden: chatHidden}" :src="chatSource" frameborder="0" />
+  <iframe :class="{ hidden: chatHidden }" :src="chatSource" frameborder="0" />
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'Chat',
+  name: "Chat",
   props: {
     chatHidden: Boolean,
-    chatSource: String,
+    chatSource: String
   }
-})
+});
 </script>
