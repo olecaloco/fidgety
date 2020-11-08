@@ -2,55 +2,61 @@
   <main class="app">
     <Navbar
       :channel="channel"
+      :chatHidden="chatHidden"
       @update:channel="channel = $event"
       @toggle-chat="toggleChat"
       @handle-submit="handleSubmit"
     />
-    <div class="player-wrap">
-      <Player :playerSource="playerSource" />
-      <Chat :chatHidden="chatHidden" :chatSource="chatSource" />
-    </div>
+    <div id="embed"></div>
   </main>
 </template>
 
 <script lang="ts">
+// @ts-nocheck
 import { defineComponent } from "vue";
 import Navbar from "./components/Navbar.vue";
-import Player from "./components/Player.vue";
-import Chat from "./components/Chat.vue";
 
 const parent = process.env.VUE_APP_PARENT;
 
 export default defineComponent({
   name: "Fidgety",
   components: {
-    Navbar,
-    Player,
-    Chat
+    Navbar
   },
   data() {
     return {
-      channel: "",
-      chatHidden: false,
-      playerSource: "",
-      chatSource: ""
+      // twitch: null,
+      channel: "xqcow",
+      chatHidden: false
     };
   },
+  mounted() {
+    const script = document.createElement("script");
+    script.setAttribute("src", "https://embed.twitch.tv/embed/v1.js");
+    script.addEventListener("load", this.initTwitch);
+    document.body.appendChild(script);
+  },
   methods: {
+    initTwitch() {
+      if (this.twitch) {
+        this.twitch.destroy();
+      }
+
+      this.twitch = new window.Twitch.Embed("embed", {
+        channel: this.channel,
+        width: "100%",
+        height: "100%",
+        parent: parent,
+        layout: this.chatHidden ? "video" : "video-with-chat"
+      });
+    },
     toggleChat() {
       this.chatHidden = !this.chatHidden;
-
-      if (this.chatHidden) {
-        this.chatSource = "";
-      } else {
-        this.chatSource = `https://www.twitch.tv/embed/${this.channel}/chat?parent=${parent}&darkpopout`;
-      }
+      this.initTwitch();
     },
     handleSubmit() {
-      if (!this.channel) return;
-
-      this.playerSource = `https://player.twitch.tv/?channel=${this.channel}&parent=${parent}`;
-      this.chatSource = `https://www.twitch.tv/embed/${this.channel}/chat?parent=${parent}&darkpopout`;
+      if (!this.channel || !this.twitch) return;
+      this.twitch.setChannel(this.channel);
     }
   }
 });
