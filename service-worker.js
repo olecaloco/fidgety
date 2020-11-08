@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.85575736347789ee327f387750d98774.js"
+  "precache-manifest.7442f92ba453a77f1536d4bfbbe96350.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "fidgety-vue"});
